@@ -58,16 +58,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+//LED
 #define STATUS_LED_Pin GPIO_PIN_13
 #define STATUS_LED_GPIO_Port GPIOC
+//BUZZ
 #define BEEPER_Pin GPIO_PIN_14
 #define BEEPER_GPIO_Port GPIOC
+//BAT-ADC
 #define VOLTAGE_DIVIDER_Pin GPIO_PIN_0
 #define VOLTAGE_DIVIDER_GPIO_Port GPIOA
-#define PA1_Pin GPIO_PIN_1
-#define PA1_GPIO_Port GPIOA
+ 
+//#define PA1_Pin GPIO_PIN_1
+//#define PA1_GPIO_Port GPIOA
+//PPM/RX2 
 #define USART2_RX_Pin GPIO_PIN_3
 #define USART2_RX_GPIO_Port GPIOA
+//MPU
 #define SPI_MPU_NSS_Pin GPIO_PIN_4
 #define SPI_MPU_NSS_GPIO_Port GPIOA
 #define SPI_MPU_SCK_Pin GPIO_PIN_5
@@ -76,44 +82,61 @@ void Error_Handler(void);
 #define SPI_MPU_MISO_GPIO_Port GPIOA
 #define SPI_MPU_MOSI_Pin GPIO_PIN_7
 #define SPI_MPU_MOSI_GPIO_Port GPIOA
-#define ESC4_Pin GPIO_PIN_0
-#define ESC4_GPIO_Port GPIOB
-#define PB1_Pin GPIO_PIN_1
-#define PB1_GPIO_Port GPIOB
-#define SPI_RX_NSS_Pin GPIO_PIN_2
-#define SPI_RX_NSS_GPIO_Port GPIOB
-#define PB10_Pin GPIO_PIN_10
-#define PB10_GPIO_Port GPIOB
+ 
+//#define PB1_Pin GPIO_PIN_1
+//#define PB1_GPIO_Port GPIOB
+ 
+ //OSD 
 #define SPI_OSD_NSS_Pin GPIO_PIN_12
 #define SPI_OSD_NSS_GPIO_Port GPIOB
+ 
+//RF 
+#define SPI_RX_NSS_Pin GPIO_PIN_2
+#define SPI_RX_NSS_GPIO_Port GPIOB
 #define SPI_RX_SCK_Pin GPIO_PIN_13
 #define SPI_RX_SCK_GPIO_Port GPIOB
 #define SPI_RX_MISO_Pin GPIO_PIN_14
 #define SPI_RX_MISO_GPIO_Port GPIOB
 #define SPI_RX_MOSI_Pin GPIO_PIN_15
 #define SPI_RX_MOSI_GPIO_Port GPIOB
-#define ESC1_Pin GPIO_PIN_8
-#define ESC1_GPIO_Port GPIOA
-#define ESC2_Pin GPIO_PIN_9
-#define ESC2_GPIO_Port GPIOA
-#define ESC3_Pin GPIO_PIN_10
-#define ESC3_GPIO_Port GPIOA
+ 
+//#define PB10_Pin GPIO_PIN_10
+//#define PB10_GPIO_Port GPIOB
+
+//MOTO
+#define ESC1_Pin GPIO_PIN_10
+#define ESC1_GPIO_Port GPIOB
+#define ESC2_Pin GPIO_PIN_6
+#define ESC2_GPIO_Port GPIOB
+#define ESC3_Pin GPIO_PIN_7
+#define ESC3_GPIO_Port GPIOB
+#define ESC4_Pin GPIO_PIN_8
+#define ESC4_GPIO_Port GPIOB
+ 
 #define PA15_Pin GPIO_PIN_15
 #define PA15_GPIO_Port GPIOA
+ 
 #define PB3_Pin GPIO_PIN_3
 #define PB3_GPIO_Port GPIOB
+ 
 #define PB4_Pin GPIO_PIN_4
 #define PB4_GPIO_Port GPIOB
+ 
 #define PB5_Pin GPIO_PIN_5
 #define PB5_GPIO_Port GPIOB
+ 
 #define PB6_Pin GPIO_PIN_6
 #define PB6_GPIO_Port GPIOB
+ 
 #define PB7_Pin GPIO_PIN_7
 #define PB7_GPIO_Port GPIOB
+ 
 #define PB8_Pin GPIO_PIN_8
 #define PB8_GPIO_Port GPIOB
+ 
 #define PB9_Pin GPIO_PIN_9
 #define PB9_GPIO_Port GPIOB
+ 
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
