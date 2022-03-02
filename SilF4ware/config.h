@@ -1,6 +1,6 @@
 #include "defines.h"
 
-// rate in deg/sec for acro mode
+// acro 模式的 deg/sec 速率
 #define MAX_RATE 1800
 #define MAX_RATEYAW 1800
 
@@ -8,49 +8,48 @@
 
 #define POLAR_EXPO 0.3 // 0.0 .. linear, 1.0 .. square curve
 
-// max angle for level mode
+// 自稳模式的最大角度
 #define LEVEL_MAX_ANGLE 80
 
-// max rate used by level pid (limit)
+// 级别 pid 使用的最大速率（限制）
 #define LEVEL_MAX_RATE 1800
 
-// Change this factor to get a correct battery voltage.
+// 更改此系数以获得正确的电池电压。
 #define ADC_SCALEFACTOR 11.111 // 11.0 for an ideal 10k/1k voltage divider
 
-// Allow automatic cell count detection (up to 6S) and report single cell voltage.
+// 允许自动检测电池计数（最长 6S）并报告单个电池电压。
 #define BATTERY_CELL_COUNT_DETECTION
 
-// Do not start software if battery is too low. Flashes 2 times repeatedly at startup.
+// 如果电池电量过低，请勿启动软件。 启动时反复闪烁 2 次。
 //#define STOP_LOWBATTERY // If below 3.3 Volt
 
-// If enabled, start LED blinking at low battery voltage
+// 如果启用，则在电池电压低时启动 LED 闪烁
 #define WARN_ON_LOW_BATTERY 3.6 // Volt
-// Voltage hysteresis for WARN_ON_LOW_BATTERY
+// WARN_ON_LOW_BATTERY电压迟滞
 #define VOLTAGE_HYSTERESIS 0.10 // Volt
 
-// compensation for battery voltage vs throttle drop
+// 电池电压与节气门下降的补偿
 #define VDROP_FACTOR 0.7
-// calculate above factor automatically
+// 自动计算上述因素
 #define AUTO_VDROP_FACTOR
 
-// lower throttle when battery below threshold
+// 当电池低于阈值时，油门较低
 #define LVC_LOWER_THROTTLE
 #define LVC_LOWER_THROTTLE_VOLTAGE 3.30
 #define LVC_LOWER_THROTTLE_VOLTAGE_RAW 2.70
 #define LVC_LOWER_THROTTLE_KP 3.0
 
-// Go into DFU Mode when powered over USB without connected battery
+// 在没有连接电池的情况下通过 USB 供电时进入 DFU 模式
 #define AUTO_BOOTLOADER
 
-// MPU-60x0 on-chip Gyro LPF filter frequency
+// MPU-60x0 片上陀螺仪 LPF 滤波器频率
 // gyro filter 0: 256 Hz, delay 0.98 ms (use this to get 8k gyro update frequency)
 // gyro filter 1: 188 Hz, delay 1.9 ms
 // gyro filter 2: 98 Hz, delay 2.8 ms
 // gyro filter 3: 42 Hz, delay 4.8 ms
 #define GYRO_LOW_PASS_FILTER 0
 
-// Gyro Notch Filters
-
+// 陀螺仪缺口过滤器
 #define RPM_FILTER // requires DSHOT_DMA_BIDIR in hardware.h -- also ensure MOTOR_POLE_COUNT in drv_dshot_bidir.c is correct
 #define RPM_FILTER_HZ_MIN 80 // do not apply RPM filtering below RPM_FILTER_HZ_MIN
 #define RPM_FILTER_HZ_FADE 40 // gradually increase notch filtering until RPM_FILTER_HZ_MIN + RPM_FILTER_HZ_FADE is reached
@@ -74,7 +73,7 @@
 
 //#define SDFT_GYRO_FILTER // Experimental frequency domain filtering. Does not work well.
 
-// Dynamic Gyro first and second order LPFs
+// 动态陀螺仪一阶和二阶有限合力平板
 
 //#define GYRO_LPF_1ST_HZ_BASE 120 // Filter frequency at zero throttle.
 //#define GYRO_LPF_1ST_HZ_MAX 120 // A higher filter frequency than loopfrequency/2.4 causes ripples.
@@ -84,49 +83,49 @@
 //#define GYRO_LPF_2ND_HZ_MAX 240
 //#define GYRO_LPF_2ND_HZ_THROTTLE 0.25
 
-// Static Gyro first order LPF
+// 静态陀螺仪一阶LPF
 //#define GYRO_LPF_1ST_HZ 240
 
-// Additional static Gyro first order LPF on yaw only
+// 仅在偏航时附加静态陀螺仪一阶 LPF
 //#define GYRO_YAW_LPF_1ST_HZ 240
 
-// Kalman gyro filter. The specified value is not Hz but affects the process noise covariance.
+// 卡尔曼陀螺过滤器。指定的值不是 Hz，但会影响过程噪声协方差。
 //#define GYRO_KALMAN_q 100 // Higher value is less filtering
 
-// Dynamic D-Term second order LPF
+// 动态 D 项二阶 LPF
 //#define DTERM_LPF_2ND_HZ_BASE 60 //* ( aux[ FN_INVERTED ] ? 0.75f : 1.0f )
 //#define DTERM_LPF_2ND_HZ_MAX 60
 //#define DTERM_LPF_2ND_HZ_THROTTLE 0.5
 
-// Whether to use Bessel type filter for D-Term instead of PT2.
+// 是否对 D 术语使用贝塞尔类型筛选器，而不是 PT2。
 //#define DTERM_BESSEL_FILTER
 
-// Static D-Term first order LPFs
+// 静态 D 项一阶 LPF
 #define DTERM_LPF_1ST_A_HZ 60
 #define DTERM_LPF_1ST_B_HZ 120
 
-// D-Term peak
+// D-期限峰值
 //#define BIQUAD_PEAK_HZ 12
 //#define BIQUAD_PEAK_Q 3
 //#define BIQUAD_PEAK_GAIN 1.2
 
-// If enabled, the D-Term filters use the LPF-filtered gyro signal from above. (RPM-, Notch-, and SDFT-filtering is always applied, if enabled.)
+// 如果启用，D-Term 滤波器将使用来自上方的 LPF 滤波陀螺仪信号。（如果启用，则始终应用 RPM、陷波和 SDFT 筛选。
 //#define CASCADE_GYRO_AND_DTERM_FILTER
 
-// Motor first order LPFs
+// 电机一阶有限合伙油量
 //#define MOTOR_FILTER_A_HZ 120
 //#define MOTOR_FILTER_B_HZ 240
 //#define MOTOR_FILTER_HZ_MULTIPLIER 1 // Multiply motor filter frequency by MOTOR_FILTER_HZ_MULTIPLIER
 //#define MOTOR_FILTER_THROTTLE_BREAKPOINT 0.25 // at and above MOTOR_FILTER_THROTTLE_BREAKPOINT.
 
-// Limit maximum motor speed change rate from MIX_CHANGE_LIMIT at zero to 2 * MIX_CHANGE_LIMIT at full motor speed
+// 将电机最大速度变化率从零MIX_CHANGE_LIMIT限制在全电机转速下为2 * MIX_CHANGE_LIMIT
 //#define MIX_CHANGE_LIMIT 25 // 25/s == 25%/10ms
-// Post-MIX_CHANGE_LIMIT motor filter
+// 后MIX_CHANGE_LIMIT电机滤波器
 //#define MIX_FILTER_HZ 120 // MIX_FILTER_HZ at zero to 2 * MIX_FILTER_HZ at full motor speed
-// Kalman motor filter. The specified value is not Hz but affects the process noise covariance.
+// 卡尔曼电机滤清器。指定的值不是 Hz，但会影响过程噪声协方差。
 #define MOTOR_KALMAN_q 100 // Higher value is less filtering
 
-// Switch function selection
+// 开关功能选择
 
 #define RATES DEVO_CHAN_9 // LOW_RATES_MULTI gets applied when RATES is 0.
 
@@ -134,32 +133,32 @@
 
 #define LEDS_ON DEVO_CHAN_7
 
-// To stop the motors on ground a switch on the remote control is necessary.
+// 要停止接地电机，必须设置遥控器上的开关。
 #define THROTTLE_KILL_SWITCH DEVO_CHAN_5
 
-// enable inverted (3D) flight code
+// 启用倒置 （3D） 飞行代码
 #define INVERTED_ENABLE // goes together with BIDIRECTIONAL in drv_dshot.c / drv_dshot_dma.c / drv_dshot_bidir.c
 #define FN_INVERTED DEVO_CHAN_6
 //#define LEVEL_MODE_INVERTED_ENABLE // be careful when enabling this
 
-// Two switchable channels via gestures: CH_AUX1 and CH_AUX2
+// 通过手势切换两个通道：CH_AUX1和CH_AUX2
 // Channel CH_AUX1 changed via gestures LLU -> 1 and LLD -> 0
 // Channel CH_AUX2 changed via gestures RRU -> 1 and RRD -> 0
 //#define AUX1_START_ON // CH_AUX1 channel starts on if this is defined, otherwise off.
 //#define AUX2_START_ON // CH_AUX2 channel starts on if this is defined, otherwise off.
 
-// lost quad beeps using motors (60 sec timeout or via channel)
+// 使用电机发出四声蜂鸣音（60 秒超时或通过通道）
 #define MOTOR_BEEPS
 #define MOTOR_BEEPS_CHANNEL DEVO_CHAN_12
 
-// Send maximum measured g-force in the telemetry data.
+// 在遥测数据中发送最大测量的重力。
 #define DISPLAY_MAX_G_INSTEAD_OF_VOLTAGE
-// Send maximum looptime in the telemetry data.
+// 在遥测数据中发送最长循环时间。
 #define DISPLAY_MAX_USED_LOOP_TIME_INSTEAD_OF_RX_PACKETS
-// Send PID values in the telemetry data.
+// 在遥测数据中发送 PID 值。
 #define DISPLAY_PID_VALUES
 
-// Radio module and protocol selection (only Bayang protocol implemented)
+// 无线电模块和协议选择（仅实现巴杨协议）
 #define RX_NRF24_BAYANG_TELEMETRY // For nRF24L01+ radio module
 //#define RX_XN297_BAYANG_TELEMETRY // For XN297 radio module harvested from toy TX
 
@@ -170,85 +169,85 @@
 
 #define AUX_ANALOG_DESTMAX 255 // only for custom DeviationTX builds
 
-// led brightness 0 .. 15 (used for solid lights only)
+// LED 亮度 0 ..15（仅用于实心灯）
 #define LED_BRIGHTNESS 15
 
-// a filter which makes throttle feel faster (aka Throttle Boost) (not active in LOW_RATES or lowbatt)
+// 使油门感觉更快的过滤器（又名油门加速）（在LOW_RATES或低电击中不活跃）
 #define THROTTLE_TRANSIENT_COMPENSATION_FACTOR 3.0
 
-// Compensate throttle for sagging battery voltage
+// 补偿节气门以降低电池电压
 #define THROTTLE_VOLTAGE_COMPENSATION
 
-// For more consistent motor reversing in 3D flight
+//在 3D 飞行中实现更一致的电机反转
 #define THROTTLE_REVERSING_KICK 0.15 // 4S
 #define THROTTLE_REVERSING_DEADTIME 20000 // 20 ms (increase this in case of over-propped motors)
 //#define THROTTLE_STARTUP_KICK 0.05
 
-// Continue stick movement with the current stick velocity in case of lost packets
+// 在丢失数据包的情况下，以当前摇杆速度继续摇杆移动
 #define RX_PREDICTOR
-// Add linear interpolation between the otherwise 5 ms staircase steps of the RX signal
+// 在 RX 信号的 5 ms 阶梯步长之间添加线性插值
 #define RX_SMOOTHING
-// Limit maximum stick velocity from STICK_VELOCITY_LIMIT around center to 2 * STICK_VELOCITY_LIMIT at full deflection
+// 将最大斗杆速度从中心周围STICK_VELOCITY_LIMIT限制在完全偏转时的2 * STICK_VELOCITY_LIMIT
 #define STICK_VELOCITY_LIMIT 7 // deflection/s (It takes 1/STICK_VELOCITY_LIMIT seconds to reach full stick deflection)
-// Apply LPF to roll, pitch, and yaw sticks
+// 将 LPF 应用于滚动、俯仰和偏航摇杆
 //#define STICK_FILTER_HZ 10
 
-// Betaflight like mix scaling (aka Airmode)
+//Betaflight like mix scaling（又名 Airmode）
 #define MIX_SCALING
-// Mix increasing yields a more crisp response but also a more jumpy quad at low RPM
+// 增加混音可产生更清晰的响应，但在低转速下也能产生更跳跃的四边形
 #define ALLOW_MIX_INCREASING
-// A higher value means a shorter active increasing period (shorter bouncy period)
+// 值越高意味着主动增加周期越短（弹性周期越短）
 #define TRANSIENT_MIX_INCREASING_HZ 2.0
-// Can be used to limit maximum motor RPM, i.e. tone down a too fast quad.
+// 可用于限制最大电机转速，即调低过快的四边形。
 #define MIX_RANGE_LIMIT 1.0f // aux[ DEVO_CHAN_11 ] ? 0.75f : 1.0f
 
-// Adjust MOTOR_IDLE_OFFSET so that the motors still spin reliably under all circumstances.
+// 调整MOTOR_IDLE_OFFSET，使电机在任何情况下都能可靠地旋转。
 #define MOTOR_IDLE_OFFSET 0.03 // 4S
-// Throttle value when throttle stick is at zero to have some headroom for pid mixing at zero throttle.
+// 当油门杆为零时，油门值为零时有一些动态余量用于零油门下的pid混合。
 #define THROTTLE_ZERO_VALUE 0.00 // 4S
 
-// Use a square root motor curve to counteract thrust ~ RPM^2
+//使用平方根电机曲线抵消推力 ~ RPM^2
 //#define THRUST_LINEARIZATION 0.4 // 0.0 .. no compensation, 1.0 .. full square root curve
 #define ALTERNATIVE_THRUST_LINEARIZATION 0.6 // different shape from the above curve; do not enable both together
 
-// A deadband can be used to eliminate stick center jitter and non-returning to exactly 0.
+// 死区可用于消除棒中心抖动和不返回到正好为 0。
 #define STICKS_DEADBAND 0.02f
 
-// throttle direct to motors for thrust measure
+// 油门直接连接到电机进行推力测量
 //#define MOTORS_TO_THROTTLE
 
-// throttle direct to motors for thrust measure as a flight mode
+// 油门直接对电机进行推力测量，作为飞行模式
 #define MOTORS_TO_THROTTLE_MODE CH_AUX1
 
-// PID tuning by gestures and/or stick position
+// 通过手势和/或摇杆位置进行PID调谐
 //#define PID_GESTURE_TUNING
 #define PID_STICK_TUNING
 #define COMBINE_PITCH_ROLL_PID_TUNING
 
-// Save gyro calibration (together with accelerometer calibration) to flash (gesture DDD)
+//将陀螺仪校准（与加速度计校准一起）保存到闪光灯（手势DDD）
 #define PERSISTENT_GYRO_CAL
 
-// Unscaled PID values tuned for 4S. Note: Compared to traditional SilverWare PID_KP values must be multiplied by 10.
+// 针对 4S 调整的未缩放 PID 值。注意：与传统的 SilverWare PID_KP值必须乘以 10。
 //             { roll  pitch yaw }
 #define PID_KP { 0.40, 0.40, 0.4 }
 #define PID_KI { 0.40, 0.40, 2.0 }
 #define PID_KD { 0.20, 0.20, 0.0 }
 
-// Compensate PID values for sagging battery voltage
+// 补偿PID值以降低电池电压
 #define PID_VOLTAGE_COMPENSATION
 
-// Invert yaw pid. Necessary when spinning props outwards.
+// 反转偏航皮。向外旋转道具时是必需的。
 #define INVERT_YAW_PID
 
-// Rotate I-term vector for a stable yaw axis (aka iTerm Rotation)
+//旋转 I 项矢量以获得稳定的偏航轴（也称为 iTerm 旋转）
 #define PID_ROTATE_ERRORS
 
-// Remove roll and pitch bounce back after flips (aka iTerm Relax)
+// 翻转后移除滚动和俯仰反弹（又名iTerm Relax）
 #define TRANSIENT_WINDUP_PROTECTION
-// Remove bounce back when quickly stopping a roll/pitch/yaw movement (but it is mostly there for yaw)
+// 当快速停止滚动/俯仰/偏航运动时，消除反弹（但它主要用于偏航）
 #define DYNAMIC_ITERM_RESET
 
-// Full smoothing at zero throttle, gradually less smoothing with increasing throttle, no smoothing at and above RFS_THROTTLE_BREAKPOINT.
+// 零油门时完全平滑，随着油门的增加逐渐减少平滑，在RFS_THROTTLE_BREAKPOINT及以上没有平滑。
 #define ROLL_FLIP_SMOOTHER // Scale P, I, and D on roll and pitch axes according to gyro speed.
 #define RFS_RATE_MIN 180 // °/s, No scaling below RFS_RATE_MIN. Start scaling at RFS_RATE_MIN.
 #define RFS_RATE_MAX 720 // °/s, Linear transition to full scaling at and above RFS_RATE_MAX.
@@ -257,45 +256,45 @@
 #define RFS_D_SCALER 0.5 // Scale D by this factor at and above RFS_RATE_MAX.
 #define RFS_THROTTLE_BREAKPOINT 0.5 // No smoothing at and above RFS_THROTTLE_BREAKPOINT.
 
-// Attenuate P and D on roll and pitch axes linearly with rising throttle until TPDA_VALUE is reached at TPDA_BREAKPOINT.
+// 在滚动轴和俯仰轴上以上升的油门线性衰减 P 和 D，直到达到TPDA_VALUEat TPDA_BREAKPOINT.
 //#define THROTTLE_PD_ATTENUATION // No scaling at zero throttle. No scaling for inverted flying.
 #define TPDA_VALUE 0.8 // Scale P and D by this factor at TPDA_BREAKPOINT.
 #define TPDA_BREAKPOINT 0.5 // Constant scaling with TPDA_VALUE at and above this throttle value.
 
-// Scale P and D on roll and pitch axes in case gyro shows activity (prop wash) without setpoint (stick) movement.
+// 在滚动轴和俯仰轴上缩放 P 和 D，以防陀螺仪显示活动（螺旋桨清洗）而不显示设定点（摇杆）移动。
 //#define PROP_WASH_REDUCER
 #define PROP_WASH_P_SCALER 1.0
 #define PROP_WASH_D_SCALER 1.5
 
-// Feed fast roll/pitch-stick changes directly to the motors to give a snappier response
+// 快速辊子/俯仰杆直接更换电机，以提供更快速的响应
 // 0.0f (or commented out) equates D-term on measurement, 1.0f equates D-term on error.
 //#define FEED_FORWARD_STRENGTH 1.0f
 //#define SMART_FF
-// Feedforward for yaw. It's an absolute value, not related to the 0 .. 1 from above.
+//偏航前馈。这是一个绝对值，与 0 无关。从上面看 1 个。
 //#define FEED_FORWARD_YAW 0.2f
 
-// Loop time in us
+//循环时间在我们
 #define LOOPTIME 250 // 125 us (8k) needs DSHOT 600 in drv_dshot_bidir.c and an STM32F405 board.
-// Correction for ceramic resonator frequency variation
+// 陶瓷谐振器频率变化的校正
 #define WALLTIME_CORRECTION_FACTOR 1.000 // set to >1 to compensate for a too slow resonator
 
-// Failsafe time in us. Sets stick inputs to zero after FAILSAFETIME no RX signal. Keeps quad stabilized.
+// 我们体内的故障安全时间。在故障保护没有RX信号时将棒状输入设置为零。保持四边形稳定。
 #define FAILSAFETIME 150000 // 0.15 seconds
-// Motors failsafe time in us. Shuts motors down after additional MOTORS_FAILSAFETIME.
+//电机故障安全时间在我们身上。在额外MOTORS_FAILSAFETIME后关闭电机。
 #define MOTORS_FAILSAFETIME 3000000 // 3 seconds
 
-// Gyro orientation:
-// The expected orientation is with the dot on the chip in the front-left corner.
-// Specify by how much you have to rotate the board so that the dot is front left.
-// The rotations are performed in order and cumulated.
-// Note, the motors don't get rotated, so they have to be referenced to the new gyro position.
+// 陀螺仪方向：
+// 预期的方向是芯片上左前角的点。
+// 指定必须旋转电路板的量，以使点位于左前方。
+// 旋转按顺序执行并累积。
+// 请注意，电机不会旋转，因此必须参考新的陀螺仪位置。
 //#define SENSOR_ROTATE_45_CCW
 //#define SENSOR_ROTATE_45_CW
 //#define SENSOR_ROTATE_90_CW
 //#define SENSOR_ROTATE_90_CCW
 //#define SENSOR_ROTATE_180
-//#define SENSOR_INVERT // Necessary if the gyro is mounted upside down. For an inverted gyro,
-// the expected orientation is with the dot on the chip in the front-right corner.
+//#define SENSOR_INVERT // 如果陀螺仪倒置安装，则为必要。对于倒置陀螺仪，
+// 预期的方向是芯片上右前角的点。
 
 #if defined FC_BOARD_OMNIBUS || defined FC_BOARD_F4XSD
 	#define SENSOR_ROTATE_90_CCW
@@ -307,30 +306,30 @@
 	#error "FC_BOARD_xxx must be defined by the toolchain, e.g. in the Keil project file."
 #endif
 
-// Motor order
+// 电机位置
 #define MOTOR_BL 2
 #define MOTOR_FL 1
 #define MOTOR_BR 4
 #define MOTOR_FR 3
 
-// For BIDIRECTIONAL motor direction, the motors can be reversed below.
+// 对于双向电机方向，电机可以在下面反转。
 #define REVERSE_MOTOR_BL false
 #define REVERSE_MOTOR_FL false
 #define REVERSE_MOTOR_BR false
 #define REVERSE_MOTOR_FR false
 
-// Disable the check for known gyro that causes the 4 times LED flash.
+// 禁用导致 4 次 LED 闪烁的已知陀螺仪的检查。
 #define GYRO_CHECK
 
-// Disable the check for development without RX module (3 times LED flash).
+// 禁用没有 RX 模块的开发检查（3 次 LED 闪光灯）。
 #define RADIO_CHECK
 
-// Logs various information to an externally connected OpenLager logger.
+// 将各种信息记录到外部连接的 OpenLager 记录器。
 //#define BLACKBOX_LOGGING
 
-// OSD usage requires uploading the custom SilF4ware.mcm font from the Utilities folder to the FC using Betaflight Configurator.
-// Display battery status, flight time, and RSSI info in the OSD.
+// OSD 的使用需要使用 Betaflight Configurator 将自定义 SilF4ware.mcm 字体从"实用工具"文件夹上传到 FC。
+// 在 OSD 中显示电池状态、飞行时间和 RSSI 信息。
 //#define OSD_ENABLE NTSC // PAL or NTSC
-// Artificial horizon for OSD.
+//OSD的地平线。
 #define ARTIFICIAL_HORIZON // Comment out to disable the artificial horizon completely.
 #define CAMERA_FOV 130 // Horizontal camera field of view in ° (needed for correct artificial horizon movement).
